@@ -49,4 +49,12 @@ class airflow::config inherits airflow {
     mode    => '0755',
     require =>  Python::Pip[$airflow::package_name]
   }
+
+  # Setup /etc/sysconfig/airflow
+  file { "/etc/sysconfig/airflow":
+    ensure  => 'file',
+    content => template("${module_name}/airflow.erb"),
+    mode    => '0644',
+    require =>  Python::Pip[$airflow::package_name]
+  }
 }
