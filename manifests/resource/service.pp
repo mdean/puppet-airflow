@@ -2,6 +2,14 @@
 # == Description: Creates a systemd service definition 
 #
 define airflow::resource::service($service_name = $name) {
+  $run_folder = $airflow::run_folder
+  $home_folder = $airflow::home_folder
+  $user = $airflow::user
+  $group = $airflow::group
+  $gunicorn_workers = $airflow::gunicorn_workers
+  $web_server_host = $airflow::web_server_host
+  $web_server_port = $airflow::web_server_port
+
   file { "${airflow::systemd_service_folder}/${service_name}.service":
     mode    => '0644',
     owner   => 'root',
